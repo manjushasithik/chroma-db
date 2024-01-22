@@ -25,8 +25,10 @@ with open("config.yaml", "r") as f:
 # create the open-source embedding function
 def create_vector_db(container_name):
     embedding_function = SentenceTransformerEmbeddings(model_name=config['Model'])
+    #data_text = load_text(config['Containers'][f'{container_name}'])
     data_text = ["abscccc","dddfdfdf"]
-    #load_text(config['Containers'][f'{container_name}'])
-    vector_db = Chroma.from_documents(documents=data_text, persist_directory="db/", embedding=embedding_function)
+    vector_db =Chroma.fromTexts(data_text, persist_directory="db/", embedding=embedding_function)
+                     
+    #vector_db = Chroma.from_documents(documents=data_text, persist_directory="db/", embedding=embedding_function)
     return True
 
