@@ -11,8 +11,11 @@ subprocess.run(['pip', 'uninstall', 'sqlite3', '-y'])
 
 # Install latest version
 subprocess.run(['pip', 'install', 'sqlite3'])
-
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 print("SQLite updated successfully.")
+import sqlite3
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_vector_db("chromadbtest")
