@@ -5,17 +5,13 @@ from create_database import create_vector_db
 #from retrieve import retrieve_vector_db
 
 import subprocess
-
-# Uninstall old version
-subprocess.run(['pip', 'uninstall', 'sqlite3', '-y'])
-
-# Install latest version
-subprocess.run(['pip', 'install', 'sqlite3'])
-__import__('pysqlite3')
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-print("SQLite updated successfully.")
-import sqlite3
+
+subprocess.check_call(
+    [sys.executable, "-m", "pip", "install", "pysqlite3-binary"]
+)
+__import__("pysqlite3")
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_vector_db("chromadbtest")
