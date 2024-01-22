@@ -4,7 +4,15 @@ from contextlib import asynccontextmanager
 from create_database import create_vector_db
 from retrieve import retrieve_vector_db
 
+import subprocess
 
+# Uninstall old version
+subprocess.run(['pip', 'uninstall', 'sqlite3', '-y'])
+
+# Install latest version
+subprocess.run(['pip', 'install', 'sqlite3'])
+
+print("SQLite updated successfully.")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_vector_db("chromadbtest")
