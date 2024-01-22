@@ -1,3 +1,16 @@
+
+import subprocess
+
+# Uninstall old version
+subprocess.run(['pip', 'uninstall', 'sqlite3', '-y'])
+
+# Install latest version
+subprocess.run(['pip', 'install', 'sqlite3'])
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+print("SQLite updated successfully.")
+import sqlite3
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
 import yaml
