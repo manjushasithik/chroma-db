@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from create_database import create_vector_db
-#from retrieve import retrieve_vector_db
+from retrieve import retrieve_vector_db
 
 import subprocess
 import sys
@@ -29,5 +29,5 @@ app.add_middleware(
 
 @app.get("/chromadb/v1/{query}")
 async def read_item(query: str):
-    return {'data' :'aa' #retrieve_vector_db(query)
+    return {'data' :retrieve_vector_db(query)
            }
