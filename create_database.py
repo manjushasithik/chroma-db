@@ -11,7 +11,7 @@ from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddi
 import yaml
 ############################################### from data_loader import load_text
 
-
+from data_loader import load_text
 # load the config file
 with open("config.yaml", "r") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
