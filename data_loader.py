@@ -2,6 +2,8 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from azure.storage.blob import ContainerClient
 from langchain_community.document_loaders import AzureBlobStorageContainerLoader
+# from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 import yaml
 
 # load the config file
@@ -13,7 +15,10 @@ container_client = ContainerClient.from_connection_string(
     config['Secure_Connection_String'], container_name=config['Containers']['chromadbtest'])
 loader = AzureBlobStorageContainerLoader(config['Secure_Connection_String'], config['Containers']['chromadbtest'])
 
-
+def load_pdf():
+    loader=PyPDFLoader("sensor.pdf")
+    pages = loader.load_and_split()
+    return pages
 # create the text loader
 def load_text(container_name):
     loader = AzureBlobStorageContainerLoader(config['Secure_Connection_String'], config['Containers'][f'{container_name}'])
